@@ -19,7 +19,7 @@ from pushover import PushoverSender
 SEND_NOTIFICATIONS = True
 
 # MySQL password constant
-MYSQL_PASSWORD = "CornerstoneShankill"
+MYSQL_PASSWORD = ""
 
 # Upload image size for processing
 IMAGE_SIZE = (700, 400)
@@ -196,7 +196,7 @@ def change_publish():
 # MySQL connection
 # Returns connection and cursor objects
 def mysql_connect(prepared, password):
-	connection = mysql.connector.connect(host='mysql.churchviewmedicalpractice.com', database='church_view_medical_practice', user='app_cvmp', password=password)
+	connection = mysql.connector.connect(host='', database='', user='', password=password)
 	connection.set_charset_collation("utf8mb4", "utf8mb4_unicode_ci")
 	cursor = connection.cursor(prepared)
 	return (connection, cursor)
