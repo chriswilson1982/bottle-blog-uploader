@@ -1,4 +1,4 @@
-# Bottle-Blog_Upload
+# Bottle-Blog-Upload
 
 This is a simple web app for uploading blog posts to our website.
 
