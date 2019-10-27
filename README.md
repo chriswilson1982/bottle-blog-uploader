@@ -1,4 +1,4 @@
-# PythonBottleUploadApp
+# Bottle-Blog_Upload
 
 This is a simple web app for uploading blog posts to our website.
 
