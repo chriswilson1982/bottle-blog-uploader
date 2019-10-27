@@ -298,7 +298,7 @@ def process_image(im, size_tuple):
 	
 # Pushover notifications
 def send_notification(text):
-	p = PushoverSender("u515rq7wbujjdq2dhd18trgv69iimm", "az36bz7n1h7ur5prdns8phjxy61xtg")
+	p = PushoverSender("", "")
 	p.send_notification(text)
 	log(text)
 
