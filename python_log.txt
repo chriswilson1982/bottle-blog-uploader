@@ -1,0 +1,116 @@
+Image size: w=595, h=240
+Aspect Fill: w=991, h=400
+Crop box (LTRB): 145, 0, 845, 400
+
+
+Health article 'Alcohol' created by Church View Medical Practice and published
+
+News article 'Medical Students' unpublished
+
+News article 'Medical Students' published
+
+News article 'Medical Students' unpublished
+
+Health article 'Alcohol' unpublished
+
+News article 'Medical Students' published
+
+Health article 'Alcohol' published
+
+Health article 'Alcohol' unpublished
+
+Health article 'Test title' created by Church View Medical Practice but not published
+
+Health article 'Test title' published
+
+Health article 'Test title' unpublished
+
+Image size: w=1580, h=2890
+Aspect Fill: w=700, h=1280
+Crop box (LTRB): 0, 440, 700, 840
+
+
+Health article 'Test title' created by Church View Medical Practice and published
+
+Image size: w=4032, h=3024
+Aspect Fill: w=700, h=525
+Crop box (LTRB): 0, 62, 700, 462
+
+
+News article 'Test article' created by Church View Medical Practice and published
+
+News article 'Test article' unpublished
+
+News article 'Test article' published
+
+News article 'Test article' unpublished
+
+Image size: w=4032, h=3024
+Aspect Fill: w=700, h=525
+Crop box (LTRB): 0, 62, 700, 462
+
+
+News article 'Test article' created by Church View Medical Practice but not published
+
+Health article 'Safer sleeping' unpublished
+
+Health article 'Safer sleeping' published
+
+News article 'Test article' published
+
+News article 'Test article' unpublished
+
+Image size: w=2880, h=1800
+Aspect Fill: w=700, h=437
+Crop box (LTRB): 0, 18, 700, 418
+
+
+News article 'Testing' created by Church View Medical Practice and published
+
+News article 'Testing' unpublished
+
+News article 'Testing' published
+
+News article 'Testing' unpublished
+
+Health article 'Getting the most from your health service' unpublished
+
+Health article 'Choose well' unpublished
+
+Health article 'Getting the most from your health service' published
+
+Health article 'Choose well' published
+
+News article 'Easter opening hours' published
+
+News article 'Easter opening hours' unpublished
+
+News article 'Medical Students' unpublished
+
+News article 'Medical Students' published
+
+News article 'Medical Students' unpublished
+
+News article 'Medical Students' published
+
+Health article 'Why no antibiotic?' unpublished
+
+Health article 'Why no antibiotic?' published
+
+Image size: w=3706, h=2470
+Aspect Fill: w=700, h=466
+Crop box (LTRB): 0, 33, 700, 433
+
+
+News article 'A letter to our patients' created by Dr Fiona Hunter and published
+
+News article 'Medical Students' unpublished
+
+News article 'Medical Students' published
+
+News article 'July holiday opening hours' unpublished
+
+News article 'Changes to online prescription ordering' created by Church View Medical Practice and published
+
+News article 'Medical Students' unpublished
+

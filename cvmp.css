@@ -1,0 +1,33 @@
+select.form-control {
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) 50%;
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: solid 1px #ccc;
+    padding-right: 25px;
+    background-image: url("data:image/svg+xml,\
+    <svg version='1.1' xmlns='http://www.w3.org/2000/svg' width='14px'\
+    height='14px' viewBox='0 0 1200 1000' fill='#888'>\
+    <path d='M1100 411l-198 -199l-353 353l-353 -353l-197 199l551 551z'/>\
+    </svg>");
+}
+
+form label.bold {
+	font-weight: 500;
+}
+
+a.no-underline, a.no-underline:active, a.no-underline:hover, a.no-underline:visited, a.no-underline:link {
+	text-decoration: none;
+	text-decoration-color: white !important;
+}
+
+a.text-faint {
+	color: #eee !important;
+}
+
+a.text-faint:hover, a.text-faint:active {
+	color: inherit !important;
+}
