@@ -97,7 +97,7 @@ def update():
 		if extension.lower() not in ('png', 'jpg', 'jpeg'):
 			return {"result" : 0, "message": "File Format Error"}
 		
-		save_path = "../churchviewmedicalpractice.com/images/{0}_images".format(type)
+		save_path = "../images/{0}_images".format(type)
 		
 		# Save to BytesIO object
 		s = io.BytesIO()
