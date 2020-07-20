@@ -13,10 +13,7 @@ if cmd_folder not in sys.path:
 
 import bottle
 from bottle import route, run, template
-
-# Define needed routes here	
-# See cvmp.py for routes
-import cvmp
+import blog_uploader # Custom routes
 
 # Setup Dreamhost passenger hook
 def application(environ, start_response):
