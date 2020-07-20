@@ -3,7 +3,6 @@
 import bottle
 from bottle import route, get, post, template, static_file, request
 from os import path
-from sys import version_info
 import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
@@ -27,9 +26,6 @@ IMAGE_SIZE = (700, 400)
 # Some convenience variables
 types = ("news", "health")
 pub = ("unpublished", "published")
-
-# Get version number
-version = ".".join(map(str, version_info[:3]))
 
 # Store article titles to check for duplicates
 titles=[]
@@ -57,12 +53,6 @@ def css_static(filename):
 @route('/')
 def index():
 	return template("main")
-
-# HELLO
-@route('/hello/<name>')
-def hello(name):
-	return template(
-		'<div style="margin-top: 10rem; text-align: center; font-size: 2em; font-family: sans-serif"><h1>Hello {{name}}!</h1><p>Built using Python {{version}} and Bottle!</p></div>', name=name, version=version)
 
 # UPDATE
 @post('/update')
@@ -134,7 +124,7 @@ def get_previous_articles():
 		cursor.execute("select * from health order by issue desc;")
 		health_records = cursor.fetchall()
 	except Error as e:
-		pass
+		log(str(e))
 	finally:
 		# Closing database connection
 		if(connection.is_connected()):
