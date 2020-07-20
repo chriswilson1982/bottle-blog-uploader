@@ -304,5 +304,5 @@ def send_notification(text):
 
 # Logging
 def log(text):
-	with open("python_log.txt", "a") as log_file:
+	with open("log.txt", "a") as log_file:
 		log_file.write(text+"\n\n")
