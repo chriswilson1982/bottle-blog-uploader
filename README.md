@@ -7,6 +7,8 @@ The app allows the entry of a title, author and body text, provides a timestamp 
 
 The body text area accepts HTML code, but newlines are detected automatically and a double newline will result in a new paragraph element automatically. There are shortcut buttons for adding HTML image and link code.
 
-Editing is not supported, though the published status of existing articles can be toggled. There is limited error handling, with error messages being displayed on the 'Submit' button. 
+Images will be resizes and cropped as needed to 700x400 pixels using an aspect fill algorithm.
+
+Editing is not supported, though the published status of existing articles can be toggled. There is limited error handling, with error messages being displayed on the 'Submit' button. The app incorporates the option of sending notifications using Pushover, to provide alerts when a new article is submitted, published or unpublished.
 
 The app is built using Python 3, Bottle, JavaScript, jQuery, HTML, CSS, Bootstrap and Font Awesome.
