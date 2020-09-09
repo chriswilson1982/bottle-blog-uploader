@@ -9,7 +9,6 @@ from datetime import datetime
 import pytz
 import hashlib
 import re
-import PIL
 from PIL import Image
 import io
 from pushover import PushoverSender
