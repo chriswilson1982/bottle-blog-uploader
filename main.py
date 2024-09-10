@@ -1,7 +1,6 @@
 import os
 import sys
-import bottle
-from bottle import route, run, template
+from bottle import Bottle, route, run, template
 import blog_uploader # Custom routes
 
 app = Bottle()
