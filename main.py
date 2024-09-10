@@ -122,9 +122,9 @@ def update():
 @app.get('/previous')
 def get_previous_articles():
 	# Connect to MySQL database
+	connection, cursor = mysql_connect(False, MYSQL_PASSWORD)
 	try:
-		connection, cursor = mysql_connect(False, MYSQL_PASSWORD)
-		
+		# connection, cursor = mysql_connect(False, MYSQL_PASSWORD)
 		cursor.execute("select * from news order by issue desc;")
 		news_records = cursor.fetchall()
 		cursor.execute("select * from health order by issue desc;")
@@ -199,8 +199,9 @@ def mysql_connect(prepared, password):
 	
 # MySQL insert new article
 def mysql_insert(type, record, password):
+	connection, cursor = mysql_connect(False, password)
 	try:
-		connection, cursor = mysql_connect(True, password)
+		# connection, cursor = mysql_connect(True, password)
 		sql_insert_query = ("""INSERT INTO `{0}` (`date`, `title`, `body`, `author`, `image`, `publish`) VALUES (%s,%s,%s,%s,%s,%s)""").format(type)
 		result  = cursor.execute(sql_insert_query, record)
 		connection.commit()
