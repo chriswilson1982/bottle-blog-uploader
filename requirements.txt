@@ -2,7 +2,7 @@ bottle==0.12.25
 dnspython==2.6.1
 markdown==3.6
 requests==2.31.0
-mysql==0.0.3
+mysql-connector-python==9.0.0
 pytz==2024.1
 pillow==10.4.0
 pushover==0.5
