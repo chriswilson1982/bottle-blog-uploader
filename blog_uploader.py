@@ -1,4 +1,4 @@
-ir# coding=utf-8
+# coding=utf-8
 
 import bottle
 from bottle import route, get, post, template, static_file, request
