@@ -32,24 +32,24 @@ titles=[]
 # STATIC ROUTES
 
 # JavaScript
-@route('/js/<filename>')
+@get('/js/<filename>')
 def js_static(filename):
 	return static_file(filename, root='./static/js/')
 
 # Images
-@route('/img/<filename>')
+@get('/img/<filename>')
 def img_static(filename):
 	return static_file(filename, root='static/img/')
 
 # CSS
-@route('/css/<filename>')
+@get('/css/<filename>')
 def css_static(filename):
 	return static_file(filename, root='./static/css/')
 
 # DYNAMIC ROUTES
 
 # INDEX
-@route('/')
+@get('/')
 def index():
 	return template("main")
 
@@ -112,7 +112,7 @@ def update():
 	return mysql_insert(type, record, password)
 
 # Get previous articles in HTML format
-@route('/previous')
+@get('/previous')
 def get_previous_articles():
 	# Connect to MySQL database
 	try:
