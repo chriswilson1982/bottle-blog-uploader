@@ -221,9 +221,9 @@ def mysql_insert(type, record, password):
 
 # MySQL toggle published status
 def mysql_toggle_publish_status(type, issue, state, title, password):
+	connection, cursor = mysql_connect(True, password)
 	try:
-		connection, cursor = mysql_connect(True, password)
-		
+		# connection, cursor = mysql_connect(True, password)
 		type_string = types[type-1]
 		new_state = (1, 0)[state] # Invert state
 		update_tuple = (new_state, issue)
