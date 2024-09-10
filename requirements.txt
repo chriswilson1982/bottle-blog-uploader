@@ -1,4 +1,4 @@
-bottle==0.12.25
+bottle==0.13.1
 dnspython==2.6.1
 markdown==3.6
 requests==2.31.0
