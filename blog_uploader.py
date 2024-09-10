@@ -2,7 +2,7 @@
 
 import bottle
 from bottle import route, get, post, template, static_file, request
-from os import path
+from os import path, getenv
 import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
@@ -14,10 +14,10 @@ import io
 from pushover import PushoverSender
 
 # Activate Pushover notifications
-SEND_NOTIFICATIONS = True
+SEND_NOTIFICATIONS = False
 
 # MySQL password constant
-MYSQL_PASSWORD = ""
+MYSQL_PASSWORD = getenv("MYSQL_PASSWORD")
 
 # Upload image size for processing
 IMAGE_SIZE = (700, 400)
