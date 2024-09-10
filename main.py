@@ -93,7 +93,12 @@ def update():
 
 	# Image upload (optional)
 	file = request.files.get("file")
-	if file:
+
+	# FIXME: This uploaded image to folders on Dreamhost, but now running in different domain
+	# Python FTP module might work
+	# For now, no images (or they can be uploaded manually on Dreamhost)
+	# if file:
+	if False:
 		extension = file.filename.split(".")[-1]
 		if extension.lower() not in ('png', 'jpg', 'jpeg'):
 			return {"result" : 0, "message": "File Format Error"}
