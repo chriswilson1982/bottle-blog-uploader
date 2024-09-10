@@ -1,8 +1,7 @@
 # coding=utf-8
 
-# import bottle
 from bottle import Bottle, route, get, post, template, static_file, request
-from os import path, environ
+import os
 import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
@@ -17,7 +16,7 @@ from pushover import PushoverSender
 SEND_NOTIFICATIONS = False
 
 # MySQL password constant
-MYSQL_PASSWORD = environ.get("MYSQL_PASSWORD")
+MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD")
 
 # Upload image size for processing
 IMAGE_SIZE = (700, 400)
