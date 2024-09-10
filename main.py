@@ -192,7 +192,7 @@ def change_publish():
 # MySQL connection
 # Returns connection and cursor objects
 def mysql_connect(prepared, password):
-	connection = mysql.connector.connect(host='mysql.dreamhost.com', database='churchviewmedicalpractice', user='mysql_admin', password=password)
+	connection = mysql.connector.connect(host='mysql.churchviewmedicalpractice.com', database='churchviewmedicalpractice', user='mysql_admin', password=password)
 	connection.set_charset_collation("utf8mb4", "utf8mb4_unicode_ci")
 	cursor = connection.cursor(prepared)
 	return (connection, cursor)
