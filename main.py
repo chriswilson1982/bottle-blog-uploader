@@ -11,13 +11,16 @@ import re
 from PIL import Image
 import io
 from ftplib import FTP
-from pathlib import Path
+#from pathlib import Path
 
 # Authentication details
 MYSQL_HOST = os.environ.get("MYSQL_HOST")
 MYSQL_USERNAME = os.environ.get("MYSQL_USERNAME")
 MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD")
 MYSQL_DATABASE = os.environ.get("MYSQL_DATABASE")
+FTP_HOST = os.environ.get("FTP_HOST")
+FTP_USERNAME = os.environ.get("FTP_USERNAME")
+FTP_PASSWORD = os.environ.get("FTP_PASSWORD")
 
 # Upload image size for processing
 IMAGE_SIZE = (700, 400)
