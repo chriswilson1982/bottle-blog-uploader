@@ -10,10 +10,6 @@ import hashlib
 import re
 from PIL import Image
 import io
-from pushover import PushoverSender
-
-# Activate Pushover notifications
-SEND_NOTIFICATIONS = False
 
 # Authentication details
 MYSQL_HOST = os.environ.get("MYSQL_HOST")
@@ -208,12 +204,6 @@ def mysql_insert(type, record):
 		sql_insert_query = ("""INSERT INTO `{0}` (`date`, `title`, `body`, `author`, `image`, `publish`) VALUES (%s,%s,%s,%s,%s,%s)""").format(type)
 		result  = cursor.execute(sql_insert_query, record)
 		connection.commit()
-		
-		# Send Pushover notification
-		if SEND_NOTIFICATIONS:
-			text = type.capitalize() + " article \'" + record[1] + "\' created by " + record[3] + (" and published" if record[5] else " but not published")
-			send_notification(text)
-		
 		return {"result" : 1, "message": "Success"}
 	except Error as error:
 		return {"result" : 0, "message": error}
@@ -234,12 +224,6 @@ def mysql_toggle_publish_status(type, issue, state, title):
 		sql_update_query = ("""UPDATE `{0}` SET `publish` = %s WHERE `issue` = %s""").format(type_string)
 		result  = cursor.execute(sql_update_query, update_tuple)
 		connection.commit()
-		
-		# Send Pushover notification
-		if SEND_NOTIFICATIONS:
-			text = type_string.capitalize() + " article \'" + title + "\' " + pub[new_state]
-			send_notification(text)
-		
 		return {"result" : 1, "message": "Success"}
 	except Error as error:
 		return {"result" : 0, "message": error}
