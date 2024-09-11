@@ -15,8 +15,11 @@ from pushover import PushoverSender
 # Activate Pushover notifications
 SEND_NOTIFICATIONS = False
 
-# MySQL password constant
+# Authentication details
+MYSQL_HOST = os.environ.get("MYSQL_HOST")
+MYSQL_USERNAME = os.environ.get("MYSQL_USERNAME")
 MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD")
+MYSQL_DATABASE = os.environ.get("MYSQL_DATABASE")
 
 # Upload image size for processing
 IMAGE_SIZE = (700, 400)
@@ -116,15 +119,15 @@ def update():
 		im.save(path, optimize=True, quality=90)
 		
 	record = (date, title, body, author, image, publish)
-	return mysql_insert(type, record, password)
+	return mysql_insert(type, record)
 
 # Get previous articles in HTML format
 @app.get('/previous')
 def get_previous_articles():
 	# Connect to MySQL database
-	connection, cursor = mysql_connect(False, MYSQL_PASSWORD)
+	connection, cursor = mysql_connect(False)
 	try:
-		# connection, cursor = mysql_connect(False, MYSQL_PASSWORD)
+		# connection, cursor = mysql_connect(False)
 		cursor.execute("select * from news order by issue desc;")
 		news_records = cursor.fetchall()
 		cursor.execute("select * from health order by issue desc;")
@@ -184,24 +187,24 @@ def change_publish():
 	issue = request.json["issue"]
 	state = request.json["state"]
 	title = request.json["title"]
-	result = mysql_toggle_publish_status(type, issue, state, title, MYSQL_PASSWORD)
+	result = mysql_toggle_publish_status(type, issue, state, title)
 	return result
 
 # GENERAL FUNCTIONS
 
 # MySQL connection
 # Returns connection and cursor objects
-def mysql_connect(prepared, password):
-	connection = mysql.connector.connect(host='mysql.churchviewmedicalpractice.com', database='churchviewmedicalpractice', user='practice_admin', password=password)
+def mysql_connect(prepared):
+	connection = mysql.connector.connect(host=MYSQL_HOST, database=MYSQL_DATABASE, user=MYSQL_USERNAME, password=MYSQL_PASSWORD)
 	connection.set_charset_collation("utf8mb4", "utf8mb4_unicode_ci")
 	cursor = connection.cursor(prepared)
 	return (connection, cursor)
 	
 # MySQL insert new article
-def mysql_insert(type, record, password):
-	connection, cursor = mysql_connect(False, password)
+def mysql_insert(type, record):
+	connection, cursor = mysql_connect(True)
 	try:
-		# connection, cursor = mysql_connect(True, password)
+		# connection, cursor = mysql_connect(True)
 		sql_insert_query = ("""INSERT INTO `{0}` (`date`, `title`, `body`, `author`, `image`, `publish`) VALUES (%s,%s,%s,%s,%s,%s)""").format(type)
 		result  = cursor.execute(sql_insert_query, record)
 		connection.commit()
@@ -221,10 +224,10 @@ def mysql_insert(type, record, password):
 			connection.close()
 
 # MySQL toggle published status
-def mysql_toggle_publish_status(type, issue, state, title, password):
-	connection, cursor = mysql_connect(True, password)
+def mysql_toggle_publish_status(type, issue, state, title):
+	connection, cursor = mysql_connect(True)
 	try:
-		# connection, cursor = mysql_connect(True, password)
+		# connection, cursor = mysql_connect(True)
 		type_string = types[type-1]
 		new_state = (1, 0)[state] # Invert state
 		update_tuple = (new_state, issue)
@@ -292,18 +295,13 @@ def process_image(im, size_tuple):
 	
 	# Return final image
 	return im3
-	
-# Pushover notifications
-def send_notification(text):
-	p = PushoverSender("", "")
-	p.send_notification(text)
-	log(text)
 
 # Logging
 def log(text):
 	with open("log.txt", "a") as log_file:
 		log_file.write(text+"\n\n")
 
+# Run app
 if os.environ.get('APP_LOCATION') == 'heroku':
 	app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 else:
