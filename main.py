@@ -10,6 +10,8 @@ import hashlib
 import re
 from PIL import Image
 import io
+from ftplib import FTP
+from pathlib import Path
 
 # Authentication details
 MYSQL_HOST = os.environ.get("MYSQL_HOST")
@@ -96,8 +98,8 @@ def update():
 	# FIXME: This uploaded image to folders on Dreamhost, but now running in different domain
 	# Python FTP module might work
 	# For now, no images (or they can be uploaded manually on Dreamhost)
-	# if file:
-	if False:
+	
+	if file:
 		extension = file.filename.split(".")[-1]
 		if extension.lower() not in ('png', 'jpg', 'jpeg'):
 			return {"result" : 0, "message": "File Format Error"}
@@ -107,12 +109,18 @@ def update():
 		# Save to BytesIO object
 		s = io.BytesIO()
 		file.save(s)
-		path = save_path + "/" + file.filename
+
+		# Path
+		path = "../images/{0}_images/".format(type) + file.filename
 		
 		# Process image with PIL and save
 		im = Image.open(s)
 		im = process_image(im, IMAGE_SIZE)
-		im.save(path, optimize=True, quality=90)
+
+		with FTP(FTP_HOST, FTP_USERNAME, FTP_PASSWORD) as ftp:
+			ftp.storbinary(f"STOR {path}", im)
+		
+		#im.save(path, optimize=True, quality=90)
 		
 	record = (date, title, body, author, image, publish)
 	return mysql_insert(type, record)
