@@ -5,3 +5,4 @@ requests==2.32.2
 mysql-connector-python==9.0.0
 pytz==2024.1
 pillow==10.4.0
+paramiko==3.4.1
