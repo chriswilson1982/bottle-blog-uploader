@@ -131,16 +131,12 @@ def update():
 		ssh = paramiko.SSHClient()
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 		ssh.connect(FTP_HOST, username=FTP_USERNAME, password=FTP_PASSWORD)
-		# key = paramiko.RSAKey.from_private_key_file('id_rsa')
-		# ssh.connect(host, port=22, username='user', pkey=key)
 		sftp = ssh.open_sftp()
-		# sftp.get(remotepath, localpath)
-		# sftp.put(localpath, remotepath)
 		
 		fp = TemporaryFile()
 		im.save(fp, extension) # save(fp, "PNG")
 
-		with open(fp, "rb") as temp:
+		with open(im, "rb") as temp:
 			temp.seek(0)
 			size = temp.tell()
 			sftp.putfo(temp, remote_path, file_size=size)
