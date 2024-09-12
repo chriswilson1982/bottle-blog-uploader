@@ -11,6 +11,7 @@ import re
 from PIL import Image
 import io
 from ftplib import FTP
+import paramiko
 #from pathlib import Path
 
 # Authentication details
