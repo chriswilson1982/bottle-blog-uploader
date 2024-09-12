@@ -141,9 +141,9 @@ def update():
 				print("Image uploaded successfully!")
 		except Exception as e:
 			print(e)
-    	finally:
-        	# Close the SSH connection
-	        ssh.close()
+    		finally:
+        		# Close the SSH connection
+	        	ssh.close()
 				
 		# sftp = ssh.open_sftp()
 		
