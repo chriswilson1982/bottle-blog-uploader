@@ -139,8 +139,10 @@ def update():
 		
 		fp = TemporaryFile()
 		im.save(fp, extension) # save(fp, "PNG")
-		
-		sftp.putfo(fp, remote_path) #  confirm=False
+
+		file_size = os.fstat(f.fileno()).st_size
+		sftp.putfo(fp, remote_path, size=file_size) #  confirm=False
+		fp.close()
 		
 		# im.save(path, optimize=True, quality=90)
 		
