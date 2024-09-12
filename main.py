@@ -128,6 +128,7 @@ def update():
 		im = process_image(im, IMAGE_SIZE)
 		
 		ssh = paramiko.SSHClient()
+		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 		ssh.connect(FTP_HOST, username=FTP_USERNAME, password=FTP_PASSWORD)
 		# key = paramiko.RSAKey.from_private_key_file('id_rsa')
 		# ssh.connect(host, username='user', pkey=key)
