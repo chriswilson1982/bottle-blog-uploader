@@ -89,10 +89,10 @@
               <select class="form-control" name="author" id="author">
                 <option value="Church View Medical Practice">Church View Medical Practice</option>
                 <option value="Dr Ruth Doggart">Dr Ruth Doggart</option>
+                <option value="Dr Peter Garland">Dr Peter Garland</option>
                 <option value="Dr Fiona Hunter">Dr Fiona Hunter</option>
                 <option value="Dr Stephen Maconachie">Dr Stephen Maconachie</option>
-                <option value="Mrs Paula Skillen">Mrs Paula Skillen</option>
-                <option value="Dr Chris Wilson">Dr Chris Wilson</option>
+                <option value="Mrs Karen Carmichael">Mrs Karen Carmichael</option>
                 
               </select>
             </div>
