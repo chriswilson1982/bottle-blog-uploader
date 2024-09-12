@@ -129,8 +129,8 @@ def update():
 		im = process_image(im, IMAGE_SIZE)
 
 		t = io.BytesIO()
-		# im.save(t, format=extension)
-    	t.seek(0)
+		im.save(t, format=extension)
+    		t.seek(0)
 		
 		ssh = paramiko.SSHClient()
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
