@@ -127,16 +127,19 @@ def update():
 		# Process image with PIL and save
 		im = Image.open(s)
 		im = process_image(im, IMAGE_SIZE)
+
+		t = io.BytesIO()
+		im.save(t)
 		
 		ssh = paramiko.SSHClient()
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 		ssh.connect(FTP_HOST, username=FTP_USERNAME, password=FTP_PASSWORD)
 		sftp = ssh.open_sftp()
 		
-		fp = TemporaryFile()
-		im.save(fp, extension) # save(fp, "PNG")
+		#fp = TemporaryFile()
+		#im.save(fp, extension) # save(fp, "PNG")
 
-		with open(im.getvalue(), "rb") as temp:
+		with open(t, "rb") as temp:
 			temp.seek(0)
 			size = temp.tell()
 			sftp.putfo(temp, remote_path, file_size=size)
