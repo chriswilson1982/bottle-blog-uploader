@@ -11,10 +11,6 @@ import re
 from PIL import Image
 import io
 import paramiko
-from tempfile import TemporaryFile
-
-#from ftplib import FTP
-#from pathlib import Path
 
 # Authentication details
 MYSQL_HOST = os.environ.get("MYSQL_HOST")
@@ -145,24 +141,21 @@ def update():
 				print("Image uploaded successfully!")
 		except Exception as e:
 			print(e)
-    		finally:
-        		# Close the SSH connection
-	        	ssh.close()
+    	finally:
+        	# Close the SSH connection
+	        ssh.close()
+				
+		# sftp = ssh.open_sftp()
+		
+		# #fp = TemporaryFile()
+		# #im.save(fp, extension) # save(fp, "PNG")
 
-
+		# with open(t.getvalue(), "rb") as temp:
+		# 	temp.seek(0)
+		# 	size = temp.tell()
+		# 	sftp.putfo(temp, remote_path, file_size=size)
 		
-		
-		sftp = ssh.open_sftp()
-		
-		#fp = TemporaryFile()
-		#im.save(fp, extension) # save(fp, "PNG")
-
-		with open(t.getvalue(), "rb") as temp:
-			temp.seek(0)
-			size = temp.tell()
-			sftp.putfo(temp, remote_path, file_size=size)
-		
-		# im.save(path, optimize=True, quality=90)
+		# # im.save(path, optimize=True, quality=90)
 		
 	record = (date, title, body, author, image, publish)
 	return mysql_insert(type, record)
