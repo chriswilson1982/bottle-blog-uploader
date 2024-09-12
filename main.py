@@ -67,12 +67,10 @@ def index():
 @app.post('/update')
 def update():
 
-	# Get date in correct timezone
-	la = pytz.timezone('America/Los_Angeles')
+	# Get date
 	belfast = pytz.timezone('Europe/Belfast')
-	now = datetime.now(la)
-	local = now.astimezone(belfast)
-	date = local.strftime('%Y-%m-%d %H:%M:%S')
+	now = datetime.now(belfast)
+	date = now.strftime('%Y-%m-%d %H:%M:%S')
 
 	# Type
 	type_value = request.forms.get("type")
@@ -107,29 +105,28 @@ def update():
 	# For now, no images (or they can be uploaded manually on Dreamhost)
 	
 	if file:
+		# Get file extension
 		extension = file.filename.split(".")[-1]
 		if extension.lower() not in ('png', 'jpg', 'jpeg'):
 			return {"result" : 0, "message": "File Format Error"}
 		
-		save_path = "../images/{0}_images".format(type)
-		
-		# Save to BytesIO object
+		# Save image file to BytesIO object
 		s = io.BytesIO()
 		file.save(s)
-
-		# Path
-		remote_path = FTP_REMOTE_PATH + BASE_IMAGE_PATH + f"/{type}_images/" + file.filename
-		
 		# Process image with PIL and save
 		im = Image.open(s)
 		im = process_image(im, IMAGE_SIZE)
-
+		# Save modified image back to BytesIO object
 		t = io.BytesIO()
 		im.save(t, format=extension)
 		t.seek(0)
-		
+
+		# SFTP setup
 		ssh = paramiko.SSHClient()
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+		# Set remote path for storage
+		remote_path = FTP_REMOTE_PATH + BASE_IMAGE_PATH + f"/{type}_images/" + file.filename
 		
 		try:
         		# Connect to the FTP server
@@ -139,23 +136,11 @@ def update():
 				# Use SFTP's putfo to upload the image_data (BytesIO object) to the server
 				sftp.putfo(t, remote_path)
 				print("Image uploaded successfully!")
-		except Exception as e:
+		except Error as e:
 			print(e)
 		finally:
 			# Close the SSH connection
 			ssh.close()
-			
-		# sftp = ssh.open_sftp()
-		
-		# #fp = TemporaryFile()
-		# #im.save(fp, extension) # save(fp, "PNG")
-
-		# with open(t.getvalue(), "rb") as temp:
-		# 	temp.seek(0)
-		# 	size = temp.tell()
-		# 	sftp.putfo(temp, remote_path, file_size=size)
-		
-		# # im.save(path, optimize=True, quality=90)
 		
 	record = (date, title, body, author, image, publish)
 	return mysql_insert(type, record)
@@ -171,8 +156,8 @@ def get_previous_articles():
 		news_records = cursor.fetchall()
 		cursor.execute("select * from health order by issue desc;")
 		health_records = cursor.fetchall()
-	except Error as e:
-		log(str(e))
+	except Exception as e:
+		print(e)
 	finally:
 		# Closing database connection
 		if(connection.is_connected()):
@@ -318,15 +303,10 @@ def process_image(im, size_tuple):
 	
 	# Logging
 	string = f"Image size: w={width}, h={height}\nAspect Fill: w={new_width}, h={new_height}\nCrop box (LTRB): {left}, {top}, {right}, {bottom}\n"
-	log(string)
+	print(string)
 	
 	# Return final image
 	return im3
-
-# Logging
-def log(text):
-	with open("log.txt", "a") as log_file:
-		log_file.write(text+"\n\n")
 
 # Run app
 if os.environ.get('APP_LOCATION') == 'heroku':
