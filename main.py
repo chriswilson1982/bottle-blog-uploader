@@ -10,8 +10,9 @@ import hashlib
 import re
 from PIL import Image
 import io
-from ftplib import FTP
 import paramiko
+
+#from ftplib import FTP
 #from pathlib import Path
 
 # Authentication details
@@ -20,18 +21,23 @@ MYSQL_USERNAME = os.environ.get("MYSQL_USERNAME")
 MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD")
 MYSQL_DATABASE = os.environ.get("MYSQL_DATABASE")
 FTP_HOST = os.environ.get("FTP_HOST")
+FTP_REMOTE_PATH = os.environ.get("FTP_REMOTE_PATH")
 FTP_USERNAME = os.environ.get("FTP_USERNAME")
 FTP_PASSWORD = os.environ.get("FTP_PASSWORD")
+BASE_IMAGE_PATH = os.environ.get("BASE_IMAGE_PATH")
 
 # Upload image size for processing
 IMAGE_SIZE = (700, 400)
 
-# Some convenience variables
+# Some convenience tuple constants
 types = ("news", "health")
 pub = ("unpublished", "published")
 
 # Store article titles to check for duplicates
 titles=[]
+
+# Paramiko setup
+paramiko.util.log_to_file("paramiko.log")
 
 # Create Bottle app
 app = Bottle()
@@ -115,16 +121,22 @@ def update():
 		file.save(s)
 
 		# Path
-		path = "../images/{0}_images/".format(type) + file.filename
+		remote_path = BASE_IMAGE_PATH + f"/{type}_images/" + file.filename
 		
 		# Process image with PIL and save
 		im = Image.open(s)
 		im = process_image(im, IMAGE_SIZE)
-
-		with FTP(FTP_HOST, FTP_USERNAME, FTP_PASSWORD) as ftp:
-			ftp.storbinary(f"STOR {path}", im)
 		
-		#im.save(path, optimize=True, quality=90)
+		ssh = paramiko.SSHClient()
+		ssh.connect(FTP_HOST, username=FTP_USERNAME, password=FTP_PASSWORD)
+		# key = paramiko.RSAKey.from_private_key_file('id_rsa')
+		# ssh.connect(host, username='user', pkey=key)
+		sftp = ssh.open_sftp()
+		# sftp.get(remotepath, localpath)
+		# sftp.put(localpath, remotepath)
+		sftp.putfo(im, remote_path)
+		
+		# im.save(path, optimize=True, quality=90)
 		
 	record = (date, title, body, author, image, publish)
 	return mysql_insert(type, record)
