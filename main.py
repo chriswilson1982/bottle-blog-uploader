@@ -141,7 +141,7 @@ def update():
 		im.save(fp, extension) # save(fp, "PNG")
 
 		file_size = os.fstat(fp.fileno()).st_size
-		sftp.putfo(fp, remote_path, size=file_size) #  confirm=False
+		sftp.putfo(fp, remote_path, file_size=file_size) #  confirm=False
 		fp.close()
 		
 		# im.save(path, optimize=True, quality=90)
