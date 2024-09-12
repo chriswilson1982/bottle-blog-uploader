@@ -135,7 +135,7 @@ def update():
 		sftp = ssh.open_sftp()
 		# sftp.get(remotepath, localpath)
 		# sftp.put(localpath, remotepath)
-		sftp.putfo(im, remote_path)
+		sftp.putfo(im, remote_path, confirm=False)
 		
 		# im.save(path, optimize=True, quality=90)
 		
