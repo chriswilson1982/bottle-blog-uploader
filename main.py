@@ -121,7 +121,7 @@ def update():
 		file.save(s)
 
 		# Path
-		remote_path = BASE_IMAGE_PATH + f"/{type}_images/" + file.filename
+		remote_path = FTP_REMOTE_PATH + BASE_IMAGE_PATH + f"/{type}_images/" + file.filename
 		
 		# Process image with PIL and save
 		im = Image.open(s)
@@ -131,7 +131,7 @@ def update():
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 		ssh.connect(FTP_HOST, username=FTP_USERNAME, password=FTP_PASSWORD)
 		# key = paramiko.RSAKey.from_private_key_file('id_rsa')
-		# ssh.connect(host, username='user', pkey=key)
+		# ssh.connect(host, port=22, username='user', pkey=key)
 		sftp = ssh.open_sftp()
 		# sftp.get(remotepath, localpath)
 		# sftp.put(localpath, remotepath)
