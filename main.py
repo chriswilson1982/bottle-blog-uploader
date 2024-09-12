@@ -136,8 +136,8 @@ def update():
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 		
 		try:
-        	# Connect to the FTP server
-        	ssh.connect(FTP_HOST, port=22, username=FTP_USERNAME, password=FTP_PASSWORD)
+        		# Connect to the FTP server
+			ssh.connect(FTP_HOST, port=22, username=FTP_USERNAME, password=FTP_PASSWORD)
 			# Open an SFTP session
 			with ssh.open_sftp() as sftp:
 				# Use SFTP's putfo to upload the image_data (BytesIO object) to the server
@@ -145,9 +145,9 @@ def update():
 				print("Image uploaded successfully!")
 		except Exception as e:
 			print(e)
-    	finally:
-        	# Close the SSH connection
-        	ssh.close()
+    		finally:
+        		# Close the SSH connection
+	        	ssh.close()
 
 
 		
