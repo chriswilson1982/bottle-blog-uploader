@@ -129,11 +129,29 @@ def update():
 		im = process_image(im, IMAGE_SIZE)
 
 		t = io.BytesIO()
-		im.save(t, extension)
+		# im.save(t, format=extension)
+    	t.seek(0)
 		
 		ssh = paramiko.SSHClient()
 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		ssh.connect(FTP_HOST, username=FTP_USERNAME, password=FTP_PASSWORD)
+		
+		try:
+        	# Connect to the FTP server
+        	ssh.connect(FTP_HOST, port=22, username=FTP_USERNAME, password=FTP_PASSWORD)
+			# Open an SFTP session
+			with ssh.open_sftp() as sftp:
+				# Use SFTP's putfo to upload the image_data (BytesIO object) to the server
+				sftp.putfo(t, remote_path)
+				print("Image uploaded successfully!")
+		except Exception as e:
+			print(e)
+    	finally:
+        	# Close the SSH connection
+        	ssh.close()
+
+
+		
+		
 		sftp = ssh.open_sftp()
 		
 		#fp = TemporaryFile()
