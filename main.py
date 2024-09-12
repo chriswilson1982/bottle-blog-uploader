@@ -138,7 +138,7 @@ def update():
 		# sftp.put(localpath, remotepath)
 		
 		fp = TemporaryFile()
-		im.save(fp) # save(fp, "PNG")
+		im.save(fp, extension) # save(fp, "PNG")
 		
 		sftp.putfo(fp, remote_path) #  confirm=False
 		
