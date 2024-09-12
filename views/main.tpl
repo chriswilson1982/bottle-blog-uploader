@@ -8,7 +8,7 @@
     <meta name="description" content="Church View Medical Practice">
     <meta name="author" content="Church View Medical Practice">
 
-    <title>App | Church View Medical Practice</title>
+    <title>Article Uploader | Church View Medical Practice</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
