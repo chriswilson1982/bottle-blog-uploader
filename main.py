@@ -11,6 +11,7 @@ import re
 from PIL import Image
 import io
 import paramiko
+from tempfile import TemporaryFile
 
 #from ftplib import FTP
 #from pathlib import Path
@@ -135,7 +136,11 @@ def update():
 		sftp = ssh.open_sftp()
 		# sftp.get(remotepath, localpath)
 		# sftp.put(localpath, remotepath)
-		sftp.putfo(im, remote_path, confirm=False)
+		
+		fp = TemporaryFile()
+		im.save(fp) # save(fp, "PNG")
+		
+		sftp.putfo(fp, remote_path) #  confirm=False
 		
 		# im.save(path, optimize=True, quality=90)
 		
