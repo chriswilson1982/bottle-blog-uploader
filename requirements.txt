@@ -1,5 +1,5 @@
 bottle==0.13.1
-dnspython==2.6.1
+dnspython==2.9.2
 markdown==3.6
 requests==2.32.2
 mysql-connector-python==9.1.0
